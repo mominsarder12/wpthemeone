@@ -1,5 +1,5 @@
 <?php
-require_once(get_theme_file_path('/inc/wpth-customize.php'));
+
 // after setup theme function start here
 
 function wpth_nav_setup()
@@ -66,16 +66,6 @@ add_action('wp_enqueue_scripts', 'wpthone_scripts');
 
 //  calling style and script end here
 
-// activate code preview js start here
-function wpth_customize_live_preview(){
-  wp_enqueue_script(
-    'live-js', get_template_directory_uri().'/assets/js/customize.js',array('customize-preview'), '', true
-  );
-}
-  add_action('customize_preview_init', 'wpth_customize_live_preview');
-// activate code preview js end here
-
-
 
 // register main sidebar start here
 function wpth_register_widgets()
@@ -94,7 +84,7 @@ add_action("widgets_init", "wpth_register_widgets");
 // register main sidebar end here
 
 
-// custom post type function including here
+// custom post type function included here
 include('custom-post.php');
 
 
@@ -150,5 +140,31 @@ add_action('manage_events_posts_custom_column', 'hosting_custom_column', 10, 2);
 //widget function calling start here
 include('widget-function.php');
 //widget function calling end here
+
+// customize file required here
+require_once(get_theme_file_path('/inc/wpth-customize.php'));
+
+// activate code preview js start here
+function wpth_customize_live_preview(){
+  wp_enqueue_script(
+    'live-js', get_template_directory_uri().'/assets/js/customize.js',array('customize-preview'), '', true
+  );
+}
+  add_action('customize_preview_init', 'wpth_customize_live_preview');
+// activate code preview js end here
+
+// resister header color section start here 
+function wpth_customize_css(){
+  ?>
+       <style type="text/css">
+           .ab-heading { color: <?php echo get_theme_mod('banner_heading_color');?> !important; }
+       </style>
+  <?php
+}
+add_action('wp_head', "wpth_customize_css");
+// resister header color section end here
+
+
+
 
 

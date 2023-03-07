@@ -11,7 +11,7 @@
             <div class="ab-content">
             <h2 class="ab-heading"><?php echo get_theme_mod('banner_heading'); ?></h2>
             <p class="ab-para"><?php echo get_theme_mod('banner_desc'); ?></p>
-            <a class="ab-link" href="#"><?php echo get_theme_mod('banner_btn'); ?></a>
+            <a class="ab-link" href="<?php echo get_theme_mod('banner_btn_link'); ?>" target="_blank"><?php echo get_theme_mod('banner_btn'); ?></a>
             </div>
         </div>
         <!-- Page Banner End Here -->
