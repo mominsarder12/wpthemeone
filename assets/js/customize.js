@@ -27,6 +27,19 @@
             $('.ab-heading').css(newval);
         });
     });
+
+    //for heading color part
+    wp.customize('banner_desc_color', function (value) {
+        value.bind(function (newval) {
+            $('.ab-para').css(newval);
+        });
+    });
+
+    wp.customize('banner_btn_color', function (value) {
+        value.bind(function (newval) {
+            $('.ab-link').css(newval);
+        });
+    });
    
 })(jQuery); // its a structure
 

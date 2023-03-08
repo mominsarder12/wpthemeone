@@ -81,6 +81,30 @@ function wpth_option_customize_register($wp_customize)
     'settings'   => 'banner_heading_color',
     'section'    => 'banner_section'
   )));
+
+  //description color setting
+  $wp_customize->add_setting('banner_desc_color', array(
+    'default'   => '#fff',
+    'transport' => 'postMessage'
+  ));
+  //description color control
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'banner_desc_color', array(
+    'label'      => __('Description Color', 'wpthtd'),
+    'settings'   => 'banner_desc_color',
+    'section'    => 'banner_section'
+  )));
+
+  //btn color setting
+  $wp_customize->add_setting('banner_btn_color', array(
+    'default'   => '#fff',
+    'transport' => 'postMessage'
+  ));
+  //btn color control
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'banner_btn_color', array(
+    'label'      => __('Button Color', 'wpthtd'),
+    'settings'   => 'banner_btn_color',
+    'section'    => 'banner_section'
+  )));
 }
 add_action('customize_register', 'wpth_option_customize_register');
  // Customize Option End Here

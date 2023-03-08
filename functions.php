@@ -158,6 +158,8 @@ function wpth_customize_css(){
   ?>
        <style type="text/css">
            .ab-heading { color: <?php echo get_theme_mod('banner_heading_color');?> !important; }
+           .ab-para { color: <?php echo get_theme_mod('banner_desc_color');?> !important; }
+           .ab-link { color: <?php echo get_theme_mod('banner_btn_color');?> !important; }
        </style>
   <?php
 }
