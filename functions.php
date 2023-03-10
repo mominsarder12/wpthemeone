@@ -10,7 +10,7 @@ function wpth_nav_setup()
 
 
   // post image support start here
-  add_theme_support('title-tag','post-thumbnails', array("books", "post", "events", "services"));
+  add_theme_support('title-tag', 'post-thumbnails', array("books", "post", "events", "services"));
   // post image support end here
 
 
@@ -108,7 +108,8 @@ function events_taxonomy()
 add_action('init', 'events_taxonomy');
 
 
-// adding  admin column start here
+// todo: adding cpt to admin dashboard
+// Add the custom columns to the Event Date post type:
 function add_acf_columns($columns)
 {
   return array_merge($columns, array(
@@ -118,8 +119,6 @@ function add_acf_columns($columns)
 }
 add_filter('manage_events_posts_columns', 'add_acf_columns');
 // adding  admin column end here
-
-
 
 // Add columns to post type CPT start here
 function hosting_custom_column($column, $post_id)
@@ -136,37 +135,50 @@ function hosting_custom_column($column, $post_id)
 add_action('manage_events_posts_custom_column', 'hosting_custom_column', 10, 2);
 //  Add columns to post type CPT end here
 
-
+// Todo: connect widget file
 //widget function calling start here
 include('widget-function.php');
 //widget function calling end here
 
+// Todo: connect customize file
 // customize file required here
 require_once(get_theme_file_path('/inc/wpth-customize.php'));
 
+// Todo:connect the js refresh file
 // activate code preview js start here
-function wpth_customize_live_preview(){
+function wpth_customize_live_preview()
+{
   wp_enqueue_script(
-    'live-js', get_template_directory_uri().'/assets/js/customize.js',array('customize-preview'), '', true
+    'live-js',
+    get_template_directory_uri() . '/assets/js/customize.js',
+    array('customize-preview'),
+    '',
+    true
   );
 }
-  add_action('customize_preview_init', 'wpth_customize_live_preview');
+add_action('customize_preview_init', 'wpth_customize_live_preview');
 // activate code preview js end here
 
+
+// todo: apply the customize css in the page
 // resister header color section start here 
-function wpth_customize_css(){
-  ?>
-       <style type="text/css">
-           .ab-heading { color: <?php echo get_theme_mod('banner_heading_color');?> !important; }
-           .ab-para { color: <?php echo get_theme_mod('banner_desc_color');?> !important; }
-           .ab-link { color: <?php echo get_theme_mod('banner_btn_color');?> !important; }
-       </style>
-  <?php
+function wpth_customize_css()
+{
+?>
+  <style type="text/css">
+    .ab-heading {
+      color: <?php echo get_theme_mod('banner_heading_color'); ?> !important
+    }
+
+    .ab-para {
+      color: <?php echo get_theme_mod('banner_desc_color'); ?> !important
+    }
+
+    .ab-link {
+      color: <?php echo get_theme_mod('banner_btn_color'); ?> !important
+    }
+  </style>
+<?php
 }
 add_action('wp_head', "wpth_customize_css");
 // resister header color section end here
-
-
-
-
-
