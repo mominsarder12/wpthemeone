@@ -182,3 +182,85 @@ function wpth_customize_css()
 }
 add_action('wp_head', "wpth_customize_css");
 // resister header color section end here
+
+
+
+//todo: create custom meta box for books post type
+
+// to register custom box function start here
+function book_meta_box()
+{
+  add_meta_box(
+    'book_meta', //id
+    __('Book Meta box', 'wpthtd'), //title
+    'books_metabox', //callback function
+    'books', //post type
+    'normal', //context
+    'default'
+
+  );
+}
+add_action('add_meta_boxes', 'book_meta_box');
+// to register custom box function end here
+
+//! create the fields 
+function books_metabox()
+{
+  global $post;
+  $author = get_post_meta($post->ID, 'author', true);
+  $price = get_post_meta($post->ID, 'price', true);
+  $description = get_post_meta($post->ID, 'description', true);
+  $select_date = get_post_meta($post->ID, 'select_date', true);
+?>
+  <p>
+    <label for="author">Author Name:</label>
+    <input type="text" name="author" id="author" value="<?php echo $author;  ?>">
+  </p>
+  <p>
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" value="<?php echo $price; ?>">
+  </p>
+  <p>
+    <label for="description">description:</label>
+    <textarea name="description" id="description" cols="" rows=""><?php echo $description; ?></textarea>
+  </p>
+  <p>
+    <label for="select_date">publish Date</label>
+    <select name="select_date" id="select_date">
+      <option> --Select-- </option>
+      
+      <option value="2001" <?php if($select_date == "2001"){echo "selected";} ?>>2001</option>
+      <option value="2002" <?php if($select_date == "2002"){echo "selected";} ?> >2002</option>
+      <option value="2003" <?php if($select_date == "2003"){echo "selected";} ?> >2003</option>
+      <option value="2004"<?php if($select_date == "2004"){echo "selected";} ?> >2004</option>
+      <option value="2005" <?php if($select_date == "2005"){echo "selected";} ?> >2005</option>
+      <option value="2006" <?php if($select_date == "2006"){echo "selected";} ?> >2006</option>
+      <option value="2007" <?php if($select_date == "2007"){echo "selected";} ?> >2007</option>
+    </select>
+  </p>
+
+<?php
+
+}
+
+// ! upadate or save the filed value
+function books_metabox_update()
+{
+  global $post;
+  if (isset($_POST['author'])) {
+    update_post_meta($post->ID, 'author', $_POST['author']);
+  }
+
+
+  if (isset($_POST['price'])) {
+    update_post_meta($post->ID, 'price', $_POST['price']);
+  }
+
+  if (isset($_POST['description'])) {
+    update_post_meta($post->ID, 'description', $_POST['description']);
+  }
+  if (isset($_POST['select_date'])) {
+    update_post_meta($post->ID, 'select_date', $_POST['select_date']);
+  }
+}
+add_action('save_post', 'books_metabox_update');

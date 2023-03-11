@@ -571,6 +571,11 @@ flex-basis: 30%;
   color:  pink;
   border-radius: 10px;
 }
+.cat {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .single_event .cat a{
   background-color:bisque;
   color:black;
